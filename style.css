@@ -1,0 +1,102 @@
+
+.login, .signup {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+body{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    background-color: #f0f2f5;
+}
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+input{
+    width: 250px;
+    padding: 10px; 
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 5px;
+    outline: none;
+
+}
+.signup {
+    display: none;
+}
+.error-box {
+    background-color: #f8d7da; 
+    color: #721c24;           
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: 5px;
+    position: fixed;           
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 300px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-family: sans-serif;
+}
+
+.error-box button {
+    background: none;
+    border: none;
+    color: #721c24;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.success-box {
+    background-color: #d4edda; 
+    color: #155724;            
+    border: 1px solid #c3e6cb;
+    padding: 15px;
+    border-radius: 5px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 300px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-family: sans-serif;
+}
+
+.success-box button {
+    background: none;
+    border: none;
+    color: #155724;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.checklist{
+    flex-direction: column;
+    display: flex;
+}
+

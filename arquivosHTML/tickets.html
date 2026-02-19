@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Tickets</title>
+    <link rel="stylesheet" href="../ticketss.css">
+</head>
+<body>
+    <header>
+        <span id="nome-usuario-display"></span>
+        <button onclick="fazerLogout()" class="btn-sair">Sair</button>
+    </header>
+
+    <div class="tickets-container">
+        <h1>Criar Novo Chamado</h1>
+        
+        <input type="text" placeholder="Título do ticket"> 
+        
+        <div class="ticket-item">
+            <input type="checkbox">
+            <span>Bug no sistema</span>
+        </div>
+        <div class="ticket-item">
+            <input type="checkbox">
+            <span>Requisição de material</span>
+        </div>
+        <div class="ticket-item">
+            <input type="checkbox">
+            <span>Erro de hardware</span>
+        </div>
+        
+        <input type="text" placeholder="Descrição do ticket">
+        <button id="btnsaveticket">Salvar Ticket</button>
+    </div>
+
+    <div style="text-align: center; margin: 20px;">
+        <button onclick="toggleTabela()" class="btn-ver-tickets">Ver Meus Tickets</button>
+    </div>
+
+    <div id="secao-tabela" class="tickets-container" style="display: none;">
+        <h2>Meus Chamados</h2>
+        
+        <input type="text" id="filtroTicket" onkeyup="filtrarTabela()" placeholder="Filtrar por título ou tipo...">
+
+        <table class="tabela-tickets">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela">
+                </tbody>
+        </table>
+    </div>
+
+    <div id="alerta-sucesso" style="display:none;" class="alerta">
+        <span id="mensagem-sucesso"></span>
+    </div>
+    <div id="alerta-erro" style="display:none;" class="alerta">
+        <span id="mensagem-erro"></span>
+    </div>
+
+    <script src="../telasjs/ticket.js"></script>
+</body>
+</html>

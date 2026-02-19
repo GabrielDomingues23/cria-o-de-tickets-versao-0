@@ -1,0 +1,93 @@
+{
+  "usuarios": [
+    {
+      "id": "2b2a",
+      "nome": "gabriel",
+      "senha": "123"
+    },
+    {
+      "id": "8e79",
+      "nome": "ga",
+      "senha": "123"
+    },
+    {
+      "id": "0cf9",
+      "nome": "123",
+      "senha": "123"
+    },
+    {
+      "id": "3741",
+      "nome": "caio",
+      "senha": "123"
+    },
+    {
+      "id": "5729",
+      "nome": "gabriel",
+      "senha": "1234"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "ac2a",
+      "autor": "gabriel",
+      "titulo": "teste",
+      "opcoes": [
+        "Bug no sistema",
+        "Requisição de material"
+      ],
+      "descricao": "teste",
+      "data": "19/02/2026, 13:24:24",
+      "Status": "Aberto"
+    },
+    {
+      "id": "f692",
+      "autor": "caio",
+      "titulo": "teste",
+      "opcoes": [
+        "Bug no sistema",
+        "Requisição de material"
+      ],
+      "descricao": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "data": "19/02/2026, 13:35:10",
+      "Status": "Aberto"
+    },
+    {
+      "id": "3cb7",
+      "autor": "gabriel",
+      "titulo": "",
+      "opcoes": [],
+      "descricao": "",
+      "data": "19/02/2026, 13:42:15",
+      "Status": "Aberto"
+    },
+    {
+      "id": "476c",
+      "autor": "gabriel",
+      "titulo": "",
+      "opcoes": [],
+      "descricao": "",
+      "data": "19/02/2026, 13:42:16",
+      "Status": "Aberto"
+    },
+    {
+      "id": "2fc9",
+      "autor": "gabriel",
+      "titulo": "",
+      "opcoes": [],
+      "descricao": "",
+      "data": "19/02/2026, 13:42:17",
+      "Status": "Aberto"
+    },
+    {
+      "id": "31eb",
+      "autor": "gabriel",
+      "titulo": "gabr",
+      "opcoes": [
+        "Bug no sistema"
+      ],
+      "descricao": "teste",
+      "data": "19/02/2026, 13:48:01",
+      "Status": "Aberto"
+    }
+  ]
+}

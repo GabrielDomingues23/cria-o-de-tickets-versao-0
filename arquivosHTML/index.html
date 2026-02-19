@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tickets</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div id="alerta-erro" class="error-box" style="display: none;">
+        <span id="mensagem-erro"></span>
+        <button onclick="fecharErro()">x</button>
+    </div>
+    <div id="alerta-erro" class="error-box" style="display: none;">
+     <span id="mensagem-erro"></span>
+        <button onclick="fecharAlerta('alerta-erro')">×</button>
+    </div>
+
+    <div id="alerta-sucesso" class="success-box" style="display: none;">
+        <span id="mensagem-sucesso"></span>
+        <button onclick="fecharAlerta('alerta-sucesso')">×</button>
+    </div>
+
+    <div id="login" class="login">
+        <input type="text" placeholder="Digite o nome de usuário">
+        <input type="password" placeholder="Digite sua senha"><br>
+        <button id="abrir-cadastro">Inscreva-se</button>
+        <button>entrar</button>
+    </div>
+    <div id="signup" class="signup">
+        <input type="text" id="nomeusuario" placeholder="Digite o nome de usuário">
+        <input type="password" id="cadastrosenha" placeholder="Digite sua senha"><br>
+        <button id="criarconta">Criar Conta</button>
+        <button id="voltar-login">Voltar</button>
+    </div>
+<script src="../telasjs/login.js"></script>
+<script src="../telasjs/signup.js"></script>
+<script src="../telasjs/main.js"></script>
+</body>
+</html>
