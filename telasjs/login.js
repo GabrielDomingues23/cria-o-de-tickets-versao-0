@@ -23,7 +23,7 @@ function mostrarSucesso(mensagem) {
     box.style.display = 'flex';
     
     // Esconde após 2 segundos
-    setTimeout(() => { fecharAlerta('alerta-sucesso'); }, 2000);
+    setTimeout(() => { fecharAlerta('alerta-sucesso'); }, 1000);
 }
 
 function fecharAlerta(id) {
@@ -42,10 +42,8 @@ btnEntrar.onclick = async function() {
 // u de usuario
     if (usuarioEncontrado){
         localStorage.setItem('usuarioLogado', usuarioEncontrado.nome);
-        mostrarSucesso(`Bem vindo ${usuarioEncontrado.nome}`)
-        setTimeout(() => {
-                location.href = "tickets.html"; 
-            }, 1000);
+        location.href = "tickets.html"; 
+
     } else{
         mostrarErro("Usuário ou senha incorretos.");
     }

@@ -60,7 +60,8 @@ btnCriar.onclick = async function() {
             mostrarSucesso("Conta salva no db.json com sucesso!");
             campoUsuario.value = "";
             campoSenha.value = "";
-            voltarParaLogin();
+            setTimeout(() => {voltarParaLogin();}, 2000);            
+
         }
 } catch (error){
         console.error("Erro ao conectar no servidor:",error)    

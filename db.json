@@ -3,7 +3,59 @@
     {
       "nome": "gabriel",
       "senha": "123"
+    },
+    {
+      "nome": "gabriel2",
+      "senha": "123"
+    },
+    {
+      "nome": "gabriel3",
+      "senha": "123"
+    },
+    {
+      "nome": "gasd",
+      "senha": "123"
+    },
+    {
+      "nome": "12313",
+      "senha": "123"
     }
   ],
-  "tickets": []
+  "tickets": [
+    {
+      "id": "1771600109442",
+      "autor": "gabriel",
+      "titulo": "teste",
+      "opcoes": [
+        "Bug no sistema"
+      ],
+      "descricao": "teste",
+      "data": "20/02/2026, 12:08:29",
+      "status": "Finalizado"
+    },
+    {
+      "id": "1771600161025",
+      "autor": "gabriel",
+      "titulo": "teste",
+      "opcoes": [
+        "Bug no sistema",
+        "Requisição de material",
+        "Erro de hardware"
+      ],
+      "descricao": "123",
+      "data": "20/02/2026, 12:09:21",
+      "status": "Aberto"
+    },
+    {
+      "id": "1771601548449",
+      "autor": "gabriel",
+      "titulo": "teste",
+      "opcoes": [
+        "teste"
+      ],
+      "descricao": "1231",
+      "data": "20/02/2026, 12:32:28",
+      "status": "Aberto"
+    }
+  ]
 }
