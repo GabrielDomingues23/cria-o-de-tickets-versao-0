@@ -62,10 +62,10 @@ app.patch('/tickets/:id', (req, res) => {
     if (index !== -1) {
         db.tickets[index].status = status; 
         salvarBanco(db);
-        console.log(`✅ Ticket ${id} finalizado com sucesso.`);
+        console.log(`Ticket ${id} finalizado com sucesso.`);
         res.json(db.tickets[index]);
     } else {
-        console.log(`❌ Erro: Ticket ${id} não encontrado.`);
+        console.log(`Erro: Ticket ${id} não encontrado.`);
         res.status(404).json({ mensagem: "Ticket não encontrado" });
     }
 });
@@ -78,6 +78,6 @@ app.delete('/tickets/:id', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
     console.log(`Para parar o servidor, aperte CTRL + C no terminal`);
 });

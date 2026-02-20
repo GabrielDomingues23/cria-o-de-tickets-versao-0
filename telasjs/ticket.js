@@ -74,7 +74,6 @@ function fazerLogout() {
 }
 async function carregarTickets() {
     const corpoTabela = document.getElementById('corpo-tabela');
-    // Pegamos o usuário e removemos espaços extras e deixamos em minúsculo
     const usuarioLogado = (localStorage.getItem('usuarioLogado') || "").trim().toLowerCase();
 
     if (!corpoTabela) return;
@@ -85,7 +84,6 @@ async function carregarTickets() {
         
         corpoTabela.innerHTML = ""; 
 
-        // FILTRO REFORÇADO: Compara autor e usuarioLogado sem diferenciar maiúsculas
         const meusTickets = tickets.filter(t => {
             const autorTicket = (t.autor || "").trim().toLowerCase();
             return autorTicket === usuarioLogado;
@@ -179,7 +177,7 @@ window.deletarTicket = async function(id) {
 
         if (resposta.ok) {
             mostrarSucesso("Ticket removido com sucesso!");
-            carregarTickets(); // Recarrega a tabela após deletar
+            carregarTickets();
         }
     } catch (e) {
         console.error("Erro ao deletar:", e);
@@ -194,7 +192,7 @@ window.finalizarTicket = async function(id) {
         const resposta = await fetch(`http://localhost:3000/tickets/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status: "Finalizado" }) // Enviando 'status' em minúsculo
+            body: JSON.stringify({ status: "Finalizado" })
         });
 
         if (resposta.ok) {

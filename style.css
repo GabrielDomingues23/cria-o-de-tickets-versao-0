@@ -1,25 +1,23 @@
-/* Container Principal (Login e Signup) */
+
 .login, .signup {
     display: flex;
     flex-direction: column;
-    width: 380px; /* Largura levemente menor para melhor estética */
-    /* Removido height fixo para o container crescer conforme o conteúdo */
+    width: 380px; 
     padding: 30px; 
     background: #a1a1a1;
     border-radius: 25px;
     align-items: center;
     justify-content: center;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box; /* Garante que o padding não aumente o tamanho da box */
+    box-sizing: border-box; 
 }
 
-/* Centralização do Body */
 body {
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Alterado para 100vh para centralizar na tela toda */
+    min-height: 100vh; 
     background-color: #6e6e6e;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -54,7 +52,7 @@ button {
     color: white;
     border: none;
     padding: 14px;
-    width: 100%; /* Agora acompanha exatamente a largura dos inputs */
+    width: 100%; 
     cursor: pointer;
     border-radius: 10px;
     margin-top: 10px;
@@ -66,13 +64,13 @@ button {
 
 button:hover {
     background-color: #0056b3;
-    transform: translateY(-2px); /* Efeito de elevação leve */
+    transform: translateY(-2px); 
 }
 
 /* Título */
 .letra {
     text-align: center;
-    color: #ffffff; /* Cor escura para contrastar com o cinza claro da box */
+    color: #ffffff; 
     font-size: 40px;
     margin-bottom: 20px;
     font-weight: 800;

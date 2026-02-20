@@ -22,7 +22,7 @@ function mostrarSucesso(mensagem) {
     texto.innerText = mensagem;
     box.style.display = 'flex';
     
-    // Esconde após 3 segundos
+    // Esconde após 2 segundos
     setTimeout(() => { fecharAlerta('alerta-sucesso'); }, 2000);
 }
 
