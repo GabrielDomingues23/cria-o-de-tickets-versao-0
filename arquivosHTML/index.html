@@ -7,19 +7,15 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <div id="alerta-erro" class="error-box" style="display: none;">
-        <span id="mensagem-erro"></span>
-        <button onclick="fecharErro()">x</button>
-    </div>
-    <div id="alerta-erro" class="error-box" style="display: none;">
-     <span id="mensagem-erro"></span>
-        <button onclick="fecharAlerta('alerta-erro')">×</button>
-    </div>
+    <div id="alerta-sucesso" class="alerta-container">
+    <span id="mensagem-sucesso"></span>
+    <button onclick="this.parentElement.style.display='none'">×</button>
+</div>
 
-    <div id="alerta-sucesso" class="success-box" style="display: none;">
-        <span id="mensagem-sucesso"></span>
-        <button onclick="fecharAlerta('alerta-sucesso')">×</button>
-    </div>
+<div id="alerta-erro" class="alerta-container">
+    <span id="mensagem-erro"></span>
+    <button onclick="this.parentElement.style.display='none'">×</button>
+</div>
 
     <div id="login" class="login">
         <h1 class="letra">Entre na sua conta</h1>

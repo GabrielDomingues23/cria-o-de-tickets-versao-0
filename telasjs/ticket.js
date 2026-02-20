@@ -33,40 +33,66 @@ function mostrarSucesso(mensagem) {
 }
 
 
-async function salvarticket(){
-    const titulo = document.querySelector('input[placeholder="Título do ticket"]').value;
-    const descricao = document.querySelector('input[placeholder="Descrição do ticket"]').value;
+async function salvarticket() {
+    const inputTitulo = document.querySelector('input[placeholder="Título do ticket"]');
+    const inputDescricao = document.querySelector('input[placeholder="Descrição do ticket"]');
+    
+    const titulo = inputTitulo.value.trim();
+    const descricao = inputDescricao.value.trim();
     const autor = localStorage.getItem('usuarioLogado') || "Usuário Anônimo";
+    
+    if (!titulo || !descricao) {
+        mostrarErro("Por favor, preencha o Título e a Descrição antes de salvar.");
+        
+        if (!titulo) inputTitulo.style.borderColor = "red";
+        if (!descricao) inputDescricao.style.borderColor = "red";
+        
+        return; 
+    }
+
     const selecionados = [];
     const checkboxes = document.querySelectorAll('.ticket-item input[type="checkbox"]:checked');
-   
-    checkboxes.forEach(cb =>{
-        selecionados.push(cb.nextElementSibling.innerText)
+    
+    checkboxes.forEach(cb => {
+        selecionados.push(cb.nextElementSibling.innerText);
     });
-    const novoTicket = {
-        autor:autor,
-        titulo:titulo,
-        opcoes:selecionados,
-        descricao:descricao,
-        data: new Date().toLocaleString(),
-        Status:"Aberto"
+
+    if (selecionados.length === 0) {
+        mostrarErro("Por favor, selecione pelo menos uma opção/tipo de ticket.");
+        return;
     }
-    try{
+
+    const novoTicket = {
+        autor: autor,
+        titulo: titulo,
+        opcoes: selecionados,
+        descricao: descricao,
+        data: new Date().toLocaleString(),
+        status: "Aberto" 
+    };
+
+    try {
         const resposta = await fetch('http://localhost:3000/tickets', {
             method: 'POST',
-            headers: {'Content-type':'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(novoTicket)
-        })
-        if (resposta.ok){
-            mostrarSucesso("Ticket salvo com sucesso!")
-            document.querySelectorAll('input').forEach(i => i.value = "");
-            checkboxes.forEach(cb => cb.checked = false);
-        }
-    }catch(e){
-        mostrarErro("erro ao conectar ao servidor")
-    }
-   
+        });
 
+        if (resposta.ok) {
+            mostrarSucesso("Ticket salvo com sucesso!");
+            
+            // Limpeza dos campos e resets de estilo
+            inputTitulo.value = "";
+            inputDescricao.value = "";
+            inputTitulo.style.borderColor = "";
+            inputDescricao.style.borderColor = "";
+            checkboxes.forEach(cb => cb.checked = false);
+        } else {
+            mostrarErro("Servidor retornou um erro ao salvar.");
+        }
+    } catch (e) {
+        mostrarErro("Erro ao conectar ao servidor. Verifique se ele está rodando.");
+    }
 }
 function fazerLogout() {
     localStorage.removeItem('usuarioLogado');

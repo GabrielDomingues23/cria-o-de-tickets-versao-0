@@ -82,3 +82,47 @@ button:hover {
 .signup {
     display: none;
 }
+
+.alerta-container {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 320px;
+    padding: 15px 25px;
+    border-radius: 12px;
+    z-index: 9999; /* Garante que fique acima de tudo */
+    display: none; /* Inicialmente escondido */
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 600;
+}
+
+/* Variante de Erro */
+#alerta-erro {
+    background-color: #dc3545;
+    color: white;
+    border: 1px solid #b02a37;
+}
+
+/* Variante de Sucesso */
+#alerta-sucesso {
+    background-color: #28a745;
+    color: white;
+    border: 1px solid #1f7a33;
+}
+
+/* Botão de fechar dentro do alerta */
+.alerta-container button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    margin-left: 15px;
+    padding: 0;
+    width: auto; /* Importante para não herdar os 272px do seu botão geral */
+    box-shadow: none;
+}
