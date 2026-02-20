@@ -2,64 +2,50 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Sistema de Tickets</title>
+    <title>Criar Chamado - Sistema de Tickets</title>
     <link rel="stylesheet" href="../ticketss.css">
 </head>
 <body>
-    <header>
-        <span id="nome-usuario-display"></span>
-        <button onclick="fazerLogout()" class="btn-sair">Sair</button>
+    <header class="main-header">
+        <div class="header-content">
+            <h2 class="logo-text">Sistema de Chamados</h2>
+            <div class="header-actions">
+                <a href="lista-tickets.html" class="btn-nav">Meus Tickets</a>
+                <button id="btnSair" class="btn-sair">Sair</button>
+            </div>
+        </div>
     </header>
 
-    <div class="tickets-container">
-        <h1>Criar Novo Chamado</h1>
-        
-        <input type="text" placeholder="Título do ticket"> 
-        
-        <div class="ticket-item">
-            <input type="checkbox">
-            <span>Bug no sistema</span>
+    <main class="content-wrapper">
+        <div class="tickets-container">
+            <h1 class="letra">Criar Novo Chamado</h1>
+            
+            <input type="text" id="tituloTicket" placeholder="Título do ticket"> 
+            
+            <div class="options-group">
+                <div class="ticket-item">
+                    <input type="checkbox" id="checkBug" value="Bug no sistema">
+                    <label for="checkBug">Bug no sistema</label>
+                </div>
+                <div class="ticket-item">
+                    <input type="checkbox" id="checkMaterial" value="Requisição de material">
+                    <label for="checkMaterial">Requisição de material</label>
+                </div>
+                <div class="ticket-item">
+                    <input type="checkbox" id="checkHardware" value="Erro de hardware">
+                    <label for="checkHardware">Erro de hardware</label>
+                </div>
+            </div>
+            
+            <input type="text" id="descricaoTicket" placeholder="Descrição do ticket">
+            <button id="btnsaveticket">Salvar Ticket</button>
         </div>
-        <div class="ticket-item">
-            <input type="checkbox">
-            <span>Requisição de material</span>
-        </div>
-        <div class="ticket-item">
-            <input type="checkbox">
-            <span>Erro de hardware</span>
-        </div>
-        
-        <input type="text" placeholder="Descrição do ticket">
-        <button id="btnsaveticket">Salvar Ticket</button>
-    </div>
+    </main>
 
-    <div style="text-align: center; margin: 20px;">
-        <button onclick="toggleTabela()" class="btn-ver-tickets">Ver Meus Tickets</button>
-    </div>
-
-    <div id="secao-tabela" class="tickets-container" style="display: none;">
-        <h2>Meus Chamados</h2>
-        
-        <input type="text" id="filtroTicket" onkeyup="filtrarTabela()" placeholder="Filtrar por título ou tipo...">
-
-        <table class="tabela-tickets">
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Tipo</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="corpo-tabela">
-                </tbody>
-        </table>
-    </div>
-
-    <div id="alerta-sucesso" style="display:none;" class="alerta">
+    <div id="alerta-sucesso" class="alerta sucesso">
         <span id="mensagem-sucesso"></span>
     </div>
-    <div id="alerta-erro" style="display:none;" class="alerta">
+    <div id="alerta-erro" class="alerta erro">
         <span id="mensagem-erro"></span>
     </div>
 

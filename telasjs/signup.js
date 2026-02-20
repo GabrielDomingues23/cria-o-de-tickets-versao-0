@@ -39,6 +39,16 @@ btnCriar.onclick = async function() {
         senha: senha
     };
     try {
+        // validação se o usuário existe na db
+        const busca = await fetch('http://localhost:3000/usuarios')
+        const dados = await busca.json()
+        const userCadastrado = Array.isArray(dados) ? dados : dados.usuario;
+        const existe = userCadastrado.find(u => u.nome.toLowerCase() === usuario.toLowerCase());
+        if (existe){
+            mostrarErro("Este nome de usuário ja existe")
+            return;
+        }
+        // caso passe da validação
         const resposta = await fetch('http://localhost:3000/usuarios', {
             method: 'POST',
             headers: {
@@ -46,7 +56,6 @@ btnCriar.onclick = async function() {
             },
             body: JSON.stringify(novoUsuario)
         });
-
         if (resposta.ok) {
             mostrarSucesso("Conta salva no db.json com sucesso!");
             campoUsuario.value = "";

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Meus Chamados - Sistema de Tickets</title>
+    <link rel="stylesheet" href="../ticketss.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <h2 class="logo-text">Sistema de Chamados</h2>
+            <div class="header-actions">
+                <a href="tickets.html" class="btn-nav">Novo Chamado</a>
+                <button id="btnSair" class="btn-sair">Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="tickets-container">
+            <h1 class="letra">Meus Chamados</h1>
+            
+            <input type="text" id="filtroTicket" placeholder="Filtrar por título ou tipo..." onkeyup="filtrarTabela()">
+
+            <div class="table-responsive">
+                <table class="tabela-tickets">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Tipo</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-tabela">
+                        </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+<div id="alerta-sucesso" class="alerta sucesso" style="display:none;">
+    <span id="mensagem-sucesso"></span>
+</div>
+
+<div id="alerta-erro" class="alerta erro" style="display:none;">
+    <span id="mensagem-erro"></span>
+</div>
+    <script src="../telasjs/ticket.js"></script>
+</body>
+</html>

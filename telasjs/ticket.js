@@ -73,27 +73,44 @@ function fazerLogout() {
     location.href = "index.html";
 }
 async function carregarTickets() {
+    const corpoTabela = document.getElementById('corpo-tabela');
+    // Pegamos o usuário e removemos espaços extras e deixamos em minúsculo
+    const usuarioLogado = (localStorage.getItem('usuarioLogado') || "").trim().toLowerCase();
+
+    if (!corpoTabela) return;
+
     try {
-        const usuarioLogado = localStorage.getItem('usuarioLogado');
         const resposta = await fetch('http://localhost:3000/tickets');
         const tickets = await resposta.json();
-        const corpoTabela = document.getElementById('corpo-tabela');
         
         corpoTabela.innerHTML = ""; 
 
-        const meusTickets = tickets.filter(t => t.autor === usuarioLogado);
+        // FILTRO REFORÇADO: Compara autor e usuarioLogado sem diferenciar maiúsculas
+        const meusTickets = tickets.filter(t => {
+            const autorTicket = (t.autor || "").trim().toLowerCase();
+            return autorTicket === usuarioLogado;
+        });
+
+        if (meusTickets.length === 0) {
+            corpoTabela.innerHTML = `<tr><td colspan="4" style="text-align:center; padding:20px; color: #fff;">Nenhum ticket encontrado para o usuário: <strong>${usuarioLogado}</strong></td></tr>`;
+            return;
+        }
 
         meusTickets.forEach((t, index) => {
-            const tipos = t.opcoes.join(', ') || "Não definido";
+            const tipos = (t.opcoes && Array.isArray(t.opcoes)) ? t.opcoes.join(', ') : "Geral";
+            const statusAtual = t.status || t.Status || "Aberto";
 
-            const linhaPrincipal = `
-                <tr onclick="expandirDescricao(${index})" style="cursor:pointer">
+            corpoTabela.innerHTML += `
+                <tr onclick="expandirDescricao(${index})" class="linha-ticket">
                     <td><strong>${t.titulo}</strong></td>
                     <td>${tipos}</td>
-                    <td><span class="status-badge">${t.status}</span></td>
-                    <td><button class="btn-detalhes">Detalhes</button></td>
+                    <td><span class="status-badge">${statusAtual}</span></td>
+                    <td>
+                        <button class="btn-finalizar" onclick="event.stopPropagation(); finalizarTicket('${t.id}')">✔</button>
+                        <button class="btn-deletar" onclick="event.stopPropagation(); deletarTicket('${t.id}')">✖</button>
+                    </td>
                 </tr>
-                <tr id="desc-${index}" class="linha-detalhe" style="display:none;">
+                <tr id="desc-${index}" class="detalhe-oculto" style="display:none;">
                     <td colspan="4">
                         <div class="descricao-box">
                             <strong>Descrição do Chamado:</strong><br>
@@ -103,10 +120,10 @@ async function carregarTickets() {
                     </td>
                 </tr>
             `;
-            corpoTabela.innerHTML += linhaPrincipal;
         });
     } catch (erro) {
-        console.error("Erro ao carregar tabela", erro);
+        console.error("Erro ao carregar:", erro);
+        corpoTabela.innerHTML = `<tr><td colspan="4" style="color:red; text-align:center;">Erro de conexão.</td></tr>`;
     }
 }
 
@@ -142,3 +159,52 @@ function toggleTabela() {
         div.style.display = 'none';
     }
 }
+// Garante que a tabela carregue assim que abrir a página
+window.onload = () => {
+    carregarTickets();
+    
+    // Configura o botão de sair que está no header
+    const btnSair = document.getElementById('btnSair');
+    if (btnSair) {
+        btnSair.onclick = fazerLogout;
+    }
+};
+window.deletarTicket = async function(id) {
+    if (!confirm("Tem certeza que deseja excluir este ticket?")) return;
+
+    try {
+        const resposta = await fetch(`http://localhost:3000/tickets/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (resposta.ok) {
+            mostrarSucesso("Ticket removido com sucesso!");
+            carregarTickets(); // Recarrega a tabela após deletar
+        }
+    } catch (e) {
+        console.error("Erro ao deletar:", e);
+        mostrarErro("Erro ao conectar com o servidor.");
+    }
+};
+
+window.finalizarTicket = async function(id) {
+    if (!confirm("Deseja finalizar este ticket?")) return;
+
+    try {
+        const resposta = await fetch(`http://localhost:3000/tickets/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: "Finalizado" }) // Enviando 'status' em minúsculo
+        });
+
+        if (resposta.ok) {
+            mostrarSucesso("Ticket finalizado!");
+            carregarTickets(); 
+        } else {
+            const erroData = await resposta.json();
+            console.error("Erro do servidor:", erroData.mensagem);
+        }
+    } catch (e) {
+        mostrarErro("Não foi possível conectar ao servidor.");
+    }
+};

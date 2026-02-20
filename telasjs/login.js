@@ -1,4 +1,4 @@
-const btnEntrar = document.querySelector('#login button:last-of-type');
+const btnEntrar = document.getElementById('btnEntrar');
 const inputUser = document.querySelector('#login input[type="text"]');
 const inputPass = document.querySelector('#login input[type="password"]');
 
@@ -23,7 +23,7 @@ function mostrarSucesso(mensagem) {
     box.style.display = 'flex';
     
     // Esconde após 3 segundos
-    setTimeout(() => { fecharAlerta('alerta-sucesso'); }, 3000);
+    setTimeout(() => { fecharAlerta('alerta-sucesso'); }, 2000);
 }
 
 function fecharAlerta(id) {
@@ -31,22 +31,25 @@ function fecharAlerta(id) {
 }
 
 btnEntrar.onclick = async function() {
+    console.log("botao clicado")
     try{
         const resposta = await fetch('http://localhost:3000/usuarios');
         const usuarios = await resposta.json();
+        const listaUsuarios = Array.isArray(usuarios) ? usuarios : (usuarios.usuarios || []);
+        const usuarioEncontrado = listaUsuarios.find(u => 
+            u.nome === inputUser.value && u.senha === inputPass.value
+        );
 // u de usuario
-    const usuarioEncontrado = usuarios.find(u => u.nome === inputUser.value && u.senha === inputPass.value);
     if (usuarioEncontrado){
         localStorage.setItem('usuarioLogado', usuarioEncontrado.nome);
         mostrarSucesso(`Bem vindo ${usuarioEncontrado.nome}`)
         setTimeout(() => {
                 location.href = "tickets.html"; 
-            }, 2000);
+            }, 1000);
     } else{
         mostrarErro("Usuário ou senha incorretos.");
     }
     } catch(e){
         console.error("Erro:",e)
     }
-    
 };

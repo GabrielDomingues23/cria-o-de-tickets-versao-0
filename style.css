@@ -1,102 +1,86 @@
-
+/* Container Principal (Login e Signup) */
 .login, .signup {
     display: flex;
     flex-direction: column;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 380px; /* Largura levemente menor para melhor estética */
+    /* Removido height fixo para o container crescer conforme o conteúdo */
+    padding: 30px; 
+    background: #a1a1a1;
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box; /* Garante que o padding não aumente o tamanho da box */
 }
-body{
+
+/* Centralização do Body */
+body {
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 75vh;
-    background-color: #f0f2f5;
+    min-height: 100vh; /* Alterado para 100vh para centralizar na tela toda */
+    background-color: #6e6e6e;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* Inputs de Texto e Senha */
+input[type="text"], 
+input[type="password"] {
+    font-size: 15px;
+    margin: 10px 0; 
+    width: 100%; 
+    box-sizing: border-box; 
+    padding: 15px;
+    border: 1px solid #333;
+    border-radius: 12px;
+    background-color: #444444;
+    color: #ffffff;
+    outline: none;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+input[type="text"]::placeholder, 
+input[type="password"]::placeholder {
+    color: #d6d6d6; 
+    opacity: 1;  
+}
+input:focus::placeholder {
+    color: #888;
+}
+
+/* Botões */
 button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 14px;
+    width: 100%; /* Agora acompanha exatamente a largura dos inputs */
     cursor: pointer;
-    border-radius: 5px;
-    margin-top: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
 }
 
 button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px); /* Efeito de elevação leve */
 }
-input{
-    width: 250px;
-    padding: 10px; 
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin: 5px;
-    outline: none;
+
+/* Título */
+.letra {
+    text-align: center;
+    color: #ffffff; /* Cor escura para contrastar com o cinza claro da box */
+    font-size: 40px;
+    margin-bottom: 20px;
+    font-weight: 800;
+    text-shadow: 0px 0px 15px rgba(2, 99, 34, 0.8), 2px 2px 5px rgba(0,0,0,0.5);
 
 }
+
+/* Ajuste para esconder o Signup inicialmente */
 .signup {
     display: none;
 }
-.error-box {
-    background-color: #f8d7da; 
-    color: #721c24;           
-    border: 1px solid #f5c6cb;
-    padding: 15px;
-    border-radius: 5px;
-    position: fixed;           
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 300px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    font-family: sans-serif;
-}
-
-.error-box button {
-    background: none;
-    border: none;
-    color: #721c24;
-    font-size: 20px;
-    cursor: pointer;
-    font-weight: bold;
-}
-.success-box {
-    background-color: #d4edda; 
-    color: #155724;            
-    border: 1px solid #c3e6cb;
-    padding: 15px;
-    border-radius: 5px;
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-width: 300px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    font-family: sans-serif;
-}
-
-.success-box button {
-    background: none;
-    border: none;
-    color: #155724;
-    font-size: 20px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.checklist{
-    flex-direction: column;
-    display: flex;
-}
-

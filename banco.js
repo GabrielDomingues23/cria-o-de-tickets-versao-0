@@ -1,41 +1,83 @@
-const API_URL = 'http://localhost:3000/usuarios';
+const express = require('express');
+const fs = require('fs');
+const cors = require('cors');
+const app = express();
+const PORT = 3000;
 
-async function buscarUsuarios() {
-    try {
-        const resposta = await fetch(API_URL);
-        if (!resposta.ok) throw new Error('Erro ao buscar dados');
-        return await resposta.json();
-    } catch (erro) {
-        console.error("Falha na conexão com o banco:", erro);
-        return [];
-    }
-}
+app.use(cors());
+app.use(express.json());
 
-async function salvarUsuario(novoUsuario) {
-    try {
-        const resposta = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(novoUsuario)
-        });
-        return resposta.ok;
-    } catch (erro) {
-        console.error("Erro ao salvar no banco:", erro);
-        return false;
-    }
-}
-window.banco = { buscarUsuarios, salvarUsuario };
+const DB_PATH = 'db.json';
 
-async function testarConexao() {
-    console.log("--- Testando Conexão via Terminal ---");
+const lerBanco = () => {
     try {
-        const resposta = await fetch(API_URL);
-        const dados = await resposta.json();
-        console.log("Conexão bem-sucedida!");
-        console.table(dados);
-    } catch (erro) {
-        console.error("Erro: Certifique-se que o npx json-server está rodando!");
-        console.error(erro.message);
+        const data = fs.readFileSync(DB_PATH, 'utf8');
+        return JSON.parse(data);
+    } catch (err) {
+        return { usuarios: [], tickets: [] };
     }
-}
-testarConexao();
+};
+
+const salvarBanco = (dados) => {
+    fs.writeFileSync(DB_PATH, JSON.stringify(dados, null, 2));
+};
+
+app.get('/usuarios', (req, res) => {
+    const db = lerBanco();
+    res.json(db.usuarios);
+});
+app.post('/usuarios', (req, res) => {
+    const db = lerBanco(); 
+    const novoUsuario = req.body;
+    db.usuarios.push(novoUsuario);
+    fs.writeFileSync('db.json', JSON.stringify(db, null, 2));
+    res.status(201).json(novoUsuario);
+});
+app.get('/tickets', (req, res) => {
+    const db = lerBanco();
+    res.json(db.tickets);
+});
+
+app.post('/tickets', (req, res) => {
+    const db = lerBanco();
+    const novoTicket = {
+        id: Date.now().toString(),
+        ...req.body
+    };
+    db.tickets.push(novoTicket);
+    salvarBanco(db);
+    res.status(201).json(novoTicket);
+});
+
+
+// Rota para Atualizar (Finalizar)
+app.patch('/tickets/:id', (req, res) => {
+    const db = lerBanco();
+    const { id } = req.params;
+    const { status } = req.body;
+
+    // Procuramos o ticket pelo ID (que vem como string do req.params)
+    const index = db.tickets.findIndex(t => t.id === id);
+    
+    if (index !== -1) {
+        db.tickets[index].status = status; 
+        salvarBanco(db);
+        console.log(`✅ Ticket ${id} finalizado com sucesso.`);
+        res.json(db.tickets[index]);
+    } else {
+        console.log(`❌ Erro: Ticket ${id} não encontrado.`);
+        res.status(404).json({ mensagem: "Ticket não encontrado" });
+    }
+});
+app.delete('/tickets/:id', (req, res) => {
+    const db = lerBanco();
+    const { id } = req.params;
+    db.tickets = db.tickets.filter(t => t.id !== id);
+    salvarBanco(db);
+    res.json({ mensagem: "Ticket removido!" });
+});
+
+app.listen(PORT, () => {
+    console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+    console.log(`Para parar o servidor, aperte CTRL + C no terminal`);
+});
